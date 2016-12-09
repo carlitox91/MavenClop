@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Registro Nuevo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        
+    </h:head>
+    <h:body>       
+        <h:form>
+            <p:messages id="mensaje" autoUpdate="false"/>
+            <p:fieldset legend="Datos Personales">
+                
+                <p:panelGrid columns="3" id="datos">
+                    <p:outputLabel value="Nombre " for="nombre" />
+                    <p:inputText id="nombre" value="#{usuarioController.persona.nombre}" required="true" requiredMessage="Debe ingresar un nombre valido"/>
+                    <p:message for="nombre" />
+                    
+                    <p:outputLabel value="Apellido " for="apellido" />                    
+                    <p:inputText id="apellido" value="#{usuarioController.persona.apellido}" required="true" requiredMessage="Debe ingresar un apellido valido"/>
+                    <p:message for="apellido" />
+                    
+                    <p:outputLabel value="Genero " for="genero" />
+                    <p:selectOneRadio id='genero' value="#{usuarioController.persona.genero}" required="true" requiredMessage="Debe ingresar un genero">
+                        <f:selectItem itemLabel="Masculino" itemValue="M" />
+                        <f:selectItem itemLabel="Femenino" itemValue="F" />
+                    </p:selectOneRadio>
+                    <p:message for="genero" />
+                    
+                    <p:outputLabel value="Fecha de Nacimiento " for="fenacimiento" />
+                    <p:calendar id="fenacimiento" value="#{usuarioController.persona.fechaNacimiento}"  mode="popup" showOn="button" 
+                                locale="es" navigator="true" showButtonPanel="true" mindate="01/01/1940" yearRange="c-180:c+12" required="true" requiredMessage="Debe seleccionar una fecha valida"/>
+                    <p:message for="fenacimiento" />
+                    
+                    <p:outputLabel value="Ciudad de residencia " for="ciudad" />
+                    <p:inputText id="ciudad" value="#{usuarioController.persona.ciudad}" required="true" requiredMessage="Debe ingresar una ciudad"/>
+                    <p:message for="ciudad" />
+                    
+                    <p:outputLabel value="Direccion " for="direccion" />
+                    <p:inputText id="direccion" value="#{usuarioController.persona.direccion}" required="true" requiredMessage="Debe ingresar direccion"/>
+                    <p:message for="direccion" />
+                    
+                    <p:outputLabel value="Telefono " for="tel" />
+                    <p:inputText id="tel" value="#{usuarioController.persona.telefono}" required="true" requiredMessage="Debe ingresar un telefono"/>
+                    <p:message for="tel" />
+                    
+                    <p:outputLabel value="Celular " for="cel" />
+                    <p:inputText id="cel" value="#{usuarioController.persona.celular}" required="true" requiredMessage="Debe ingresar un celular"/>
+                    <p:message for="cel" />
+                </p:panelGrid> 
+            </p:fieldset>    
+             
+                <p:fieldset legend="Datos de la Usuario"> 
+                <p:panelGrid columns="3" id="cuenta">
+                
+                    <p:outputLabel for="usuario" value="Usuario"/>
+                    <p:inputText id="usuario" value="#{usuarioController.usuario.login}" required="true" requiredMessage="Campo requerido"/>
+                    <p:message for="usuario" />
+                    
+                    <p:outputLabel for="tipo" value="Tipo de Rol"/>
+                    <p:selectOneMenu id="tipo" value="#{usuarioController.usuario.rol}" required="true" requiredMessage="Campo requerido"> 
+                        <f:selectItem itemValue="1" itemLabel="Administrador"/>
+                        <f:selectItem itemValue="2" itemLabel="Planeador"/>
+                        <f:selectItem itemValue="3" itemLabel="Operador"/>
+                    </p:selectOneMenu>
+                    <p:message for="tipo" />
+                                 
+                    <p:outputLabel for="clave1" value="Clave"/>
+                    <p:password id="clave1" value="#{usuarioController.usuario.clave}" required="true" requiredMessage="Las claves no coinciden." 
+                                weakLabel="Debil" goodLabel="Buena" strongLabel="Fuerte" match="clave2" feedback="true" promptLabel="Ingrese una clave" />
+                    <p:message for="clave1" />
+                    
+                    <p:outputLabel for="clave2" value="Clave"/>
+                    <p:password id="clave2" required="true" requiredMessage="Campo requerido."/>
+                    <p:message for="clave2" />
+                </p:panelGrid>
+                
+                <p:commandButton value="Registrar" actionListener="#{personaController.registrar()}" id="iconOnly"  icon="ui-icon-check" update="datos,cuenta"/>
+                
+            </p:fieldset>
+        </h:form>
+        <h:outputScript library="js" name="spanishLocale.js"/>
+    </h:body>
+</html>
